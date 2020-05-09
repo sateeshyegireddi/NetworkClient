@@ -30,6 +30,10 @@ final class APIClient {
                 return try FileReader.readDataFromFile(model,
                                                 at: path).get() })
         }
+        if InternetConnection.shared.isConnected == false {
+            completion(.failure(NetworkError.noNetwork))
+            return
+        }
         transport.fetch(request: urlRequest) { data in
             completion(Result { try JSONDecoder().decode(Model.self,
                                                          from: data.get()) })

@@ -11,6 +11,7 @@ import Foundation
 enum NetworkError: Error, CustomStringConvertible {
     case request
     case server
+    case noNetwork
     case invalidURL(URLConvertible)
     case jsonParse
     case genericError(Any)
@@ -20,6 +21,8 @@ enum NetworkError: Error, CustomStringConvertible {
             return "The request failed due to an error in the request."
         case .server:
             return "The request failed due to a server-side error."
+        case .noNetwork:
+            return "It seems the device is not connected to internet. Please check your internet connection."
         case .invalidURL(let url):
             return "Invalid URL: \(url)."
         case .jsonParse:
